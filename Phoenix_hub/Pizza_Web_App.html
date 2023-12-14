@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+        }
+
+        h2 {
+            font-family: cursive;
+            text-align: center;
+        }
+
+        .img-img {
+            height: 200px;
+            width: 200px;
+            filter:drop-shadow(2px 2px 6px rgb(34, 34, 34));
+            object-fit: contain;
+            position: absolute;
+            top: 10px;
+            
+
+        }
+
+        #position1 {
+            left: 250px;
+        }
+
+        #position2 {
+            left: 450px;
+        }
+
+        #position3 {
+            left: 650px;
+        }
+
+        #position4 {
+            left: 860px;
+            top: 10px;
+        }
+
+        #position5 {
+            left: 1070px;
+            top: 10px;
+        }
+        #table1{
+             border:1px solid rgb(241, 240, 240);
+             border-radius: 3px;
+             box-shadow: 2px 2px 6px rgb(58, 58, 58) ;
+             margin-left: 28%;
+             position: absolute;
+             top:200px;
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             
+             
+        
+            
+        }
+        #table1 tr:last-child{
+             background-color: rgb(217, 218, 218);
+        }
+        #table1 tr:first-child{
+             background-color: rgb(217, 218, 218);
+        }
+        #total-bill{
+            color:red;
+        }
+        
+    </style>
+</head>
+
+<body>
+        
+    <div style="height: 120px;background-color: rgb(252, 182, 52);">
+                   <h2 >Pheonix Hub</h2>
+        <img src="pp.png" alt="" class="img-img">
+        <img src="non.webp" alt="img-img" class="img-img" id="position1">
+        <img src="dessert.png" alt="img-img" class="img-img" id="position2">
+        <img src="d2.png" alt="" class="img-img" id="position3">
+        <img src="kiwi.png" alt="" class="img-img" id="position4">
+        <img src="orange.png" alt="" class="img-img" id="position5">
+
+    </div>
+
+</body>
+
+<script>
+    // Arrays for Items and for their quantities ,Prices....
+    let items = []
+    let items_price = []
+    let Quantity = []
+
+    //Bill receipt function
+       function bill_receipt(){
+          if(items.length>0){
+
+          
+          document.write(`${items.length}`)
+            let sum=0;
+            document.write("<table   id='table1' cellpadding='10' cellspacing='0'>")
+                
+          
+                 document.write("<tr><th> ITEMS  </th> <th>  EACH PRICE  </th><th>  QUANTITY  </th> <th>   TOTAL OF EACH ITEM </th></tr> <br><br><br>")
+ 
+            for (let i = 0; i < items.length; i++) {
+               
+                sum=sum+(items_price[i] * Quantity[i]);
+                document.write("<tr> <th>" + items[i] + "</th>" + "<th>" + items_price[i] + "/-</th>" + "<th>" + Quantity[i] + "</th>" + "<th>" + items_price[i] * Quantity[i] + "/-</th></tr> <br><br><br>")
+            }
+            document.write("<tr><th></th><th></th><th></th><th></th></tr>")
+            document.write("<tr><th></th><th>TOTAL BILL</th><th>--</th><th><span id='total-bill'>"+sum+"/- </span></th></tr>")
+            document.write("</table>")
+
+            alert("Thank you for Spending your valuable time")
+       }
+    }
+
+
+    // Wish to purchase more ? or display the bill function
+    function wish_to_purchase() {
+        let ch = prompt("Would you like to Shop more ?\n (yes/y) for continue \n Press other key for Not").toLocaleLowerCase()
+        if (ch == "yes" || ch == 'y') {
+            home()
+        }
+        else {
+             bill_receipt()
+        }
+    
+    }
+    // adding items into arrays
+    function add_items(it, pr, q) {
+        items.push(it)
+        items_price.push(pr)
+        Quantity.push(q)
+
+    }
+
+    //------------------------------------------------Item : Veg Pizza ------------------------------------------------
+
+    //Check the quantity of veg pizza
+    function check_quantity_vegpizza(qt) {
+        if (qt > 0) {
+            return true
+        }
+        else {
+            alert("Enter the valid quantity number")
+            veg_pizza()
+        }
+    }
+
+    // conforming order of veg pizaa
+
+    function veg_pizaa_order() {
+        let order = prompt("Would you like to purchase this ? \n(yes/y) for Purchase \n Press other key for Not ").toLocaleLowerCase()
+        if (order === "yes" || order === 'y') {
+            alert("We are conforming Your order")
+        }
+        else {
+            veg_pizza()
+        }
+
+    }
+
+    // This is  veg pizza
+
+    function veg_pizza() {
+
+        let veg_ch = Number(prompt(" AVAILABLE VEG PIZAAS IN OUR HUB \n 1.Garden Fresh Grilled Veggi \n 2.Peppy Panner\n 3.Veggie Paradise          \n 4.Go Back"))
+        let item1 = "Garden Fresh Grilled Veggi"
+        let item2 = "Peppy paneer"
+        let item3 = "Veggie Paradise"
+        let gst = 40
+        if (veg_ch === 1) {
+            let size = Number(prompt("You chose Garden Fresh Grilled Veggi  \nChoose the Size \n 1.Small   300/-\n 2.Medium    400/- \n 3.Large    500/-"))
+            let small = 300
+            let Medium = 400
+            let large = 500
+            if (size === 1) {
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item1, small, qt)
+                    wish_to_purchase()
+                }
+
+
+            }
+            else if (size === 2) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item1, Medium, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else if (size === 3) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item1, large, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else {
+                alert("Please chooose the valid option ")
+                veg_pizza()
+            }
+
+        }
+        else if (veg_ch === 2) {
+
+            let size = Number(prompt("You chose Peppy Panner  \nChoose the Size \n 1.Small   200/- \n 2.Medium    300/- \n 3.Large    400/-"))
+            let small = 200
+            let Medium = 300
+            let large = 400
+            if (size === 1) {
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item2, small, qt)
+                    wish_to_purchase()
+                }
+
+
+            }
+            else if (size === 2) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item2, Medium, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else if (size === 3) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item2, large, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else {
+                alert("Please chooose the valid option ")
+                veg_pizza()
+            }
+
+        }
+        else if (veg_ch == 3) {
+            let size = Number(prompt("You chose Veggie Paradise    \nChoose the Size \n 1.Small    100/-\n 2.Medium      200/-\n 3.Large      300/-"))
+            let small = 100
+            let Medium = 200
+            let large = 300
+            if (size === 1) {
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item3, small, qt)
+                    wish_to_purchase()
+                }
+
+
+            }
+            else if (size === 2) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item3, Medium, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else if (size === 3) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_vegpizza(qt)) {
+                    veg_pizaa_order()
+                    add_items(item3, large, qt)
+                    wish_to_purchase()
+                }
+
+            }
+
+        }
+        else if (veg_ch === 4) {
+            home()
+        }
+        else {
+            alert("please choose the valid option")
+            veg_pizza()
+        }
+
+    }
+    
+    //--------------------------------------------Item : Non veg Pizza -------------------------------------------------
+
+    // check the quantity of non_veg pizza
+    function check_quantity_nonvegpizza(qt) {
+        if (qt > 0) {
+            return true
+        }
+        else {
+            alert("Enter the valid quantity number")
+            nonveg_pizza()
+        }
+    }
+    // corforming the order of non veg pizza
+    function nonveg_pizaa_order() {
+        let order = prompt("Would you like to purchase this ? \n(yes/y) for Purchase \n Press other key for Not ").toLocaleLowerCase()
+        if (order === "yes" || order === 'y') {
+            alert("We are conforming Your order")
+        }
+        else {
+            nonveg_pizza()
+        }
+
+    }
+    // This is Nonveg Pizza function
+    function nonveg_pizza() {
+
+        let veg_ch = Number(prompt(" AVAILABLE NON VEG PIZAAS IN OUR HUB \n 1.Chicken fiesta \n 2.Indi Chicken tikka\n 3.Chicken pepperoni          \n 4.Go Back"))
+        let item1 = "Chicken fiesta"
+        let item2 = "Indi Chicken tikka"
+        let item3 = "Chicken pepperoni"
+        let gst = 60
+        if (veg_ch === 1) {
+            let size = Number(prompt("You chose Chicken fiesta  \nChoose the Size \n 1.Small   300/-\n 2.Medium    400/- \n 3.Large    500/-"))
+            let small = 300
+            let Medium = 400
+            let large = 500
+            if (size === 1) {
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item1, small, qt)
+                    wish_to_purchase()
+                }
+
+
+            }
+            else if (size === 2) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item1, Medium, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else if (size === 3) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item1, large, qt)
+                    wish_to_purchase()
+                }
+
+            }
+
+            else {
+                alert("Please chooose the valid option ")
+                nonveg_pizza()
+            }
+
+        }
+        else if (veg_ch === 2) {
+
+            let size = Number(prompt("You chose Indi Chicken tikka  \nChoose the Size \n 1.Small   300/- \n 2.Medium    400/- \n 3.Large    600/-"))
+            let small = 300
+            let Medium = 400
+            let large = 600
+
+            if (size === 1) {
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item2, small, qt)
+                    wish_to_purchase()
+                }
+
+
+            }
+            else if (size === 2) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item2, Medium, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else if (size === 3) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item2, large, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else {
+                alert("Please chooose the valid option ")
+                nonveg_pizza()
+            }
+
+        }
+        else if (veg_ch == 3) {
+            let size = Number(prompt("You chose Chicken pepperoni   \nChoose the Size \n 1.Small    200/-\n 2.Medium      350/-\n 3.Large      500/-"))
+            let small = 200
+            let Medium = 350
+            let large = 500
+
+            if (size === 1) {
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item3, small, qt)
+                    wish_to_purchase()
+                }
+
+
+            }
+            else if (size === 2) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item3, Medium, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else if (size === 3) {
+
+                let qt = Number(prompt("Select the Quantity"))
+                if (check_quantity_nonvegpizza(qt)) {
+                    nonveg_pizaa_order()
+                    add_items(item3, large, qt)
+                    wish_to_purchase()
+                }
+
+            }
+            else {
+                alert("Please chooose the valid option ")
+                nonveg_pizza()
+            }
+
+
+
+        }
+        else if (veg_ch === 4) {
+            home()
+        }
+        else {
+            alert("please choose the valid option")
+            nonveg_pizza()
+        }
+
+
+    }
+// ----------------------------------------------Item :  Desserts------------------------------------------------------
+    //Check quantity of desserts
+    function check_quantity_desserts(qt) {
+        if (qt > 0) {
+            return true
+        }
+        else {
+            alert("Enter the valid quantity number")
+            desserts()
+        }
+    }
+
+    // conforming order of desserts
+    function desserts_order() {
+        let order = prompt("Would you like to purchase this ? \n(yes/y) for Purchase \n Press other key for Not ").toLocaleLowerCase()
+        if (order === "yes" || order === 'y') {
+            alert("We are conforming Your order")
+        }
+        else {
+            desserts()
+        }
+
+    }
+
+    // This is the desserts function
+
+    function desserts() {
+
+        let item1 = "Chocolate cakes"
+        let item2 = "Salted chacolate"
+        let item3 = "Black berry & lemon flavor"
+        let item1_price = 200
+        let item2_price = 150
+        let item3_price = 300
+
+        let des_ch = Number(prompt(`AVAILABLE DESSERTS IN OUR HUB \n1.${item1}   ${item1_price}/-\n 2.${item2}   ${item2_price}/-\n 3.${item3}   ${item3_price}/-\n 4.Go Home`))
+
+        if (des_ch === 1) {
+            let qt = Number(prompt(`You chose ${item1} \n Please select the Quantity `))
+            if (check_quantity_desserts(qt)) {
+                desserts_order()
+                add_items(item1, item1_price, qt)
+                wish_to_purchase()
+
+            }
+
+        }
+        else if (des_ch === 2) {
+            let qt = Number(prompt(`You chose ${item2} \n Please select the Quantity `))
+            if (check_quantity_desserts(qt)) {
+                desserts_order()
+                add_items(item2, item2_price, qt)
+                wish_to_purchase()
+
+            }
+
+
+        }
+        else if (des_ch == 3) {
+            let qt = Number(prompt(`You chose ${item3} \n Please select the Quantity `))
+            if (check_quantity_desserts(qt)) {
+                desserts_order()
+                add_items(item3, item3_price, qt)
+                wish_to_purchase()
+
+            }
+
+
+        }
+        else if (des_ch === 4) {
+            home()
+        }
+        else {
+            alert("please choose the valid option")
+            desserts()
+        }
+    }
+    //--------------------------------------------Item : Juice ----------------------------------------------------------
+
+    // Check quantity of juice's
+    function check_quantity_juice(qt) {
+        if (qt > 0) {
+            return true
+        }
+        else {
+            alert("Enter a valid quantity number")
+            juice()
+        }
+    }
+
+    //Want to conform juice order
+    function juice_order() {
+        let order = prompt("Would you like to purchase this ?\n Press (yes/y) for Purchase \n Press other key for Not").toLocaleLowerCase()
+        if (order === "yes" || order === 'y') {
+            alert("We are conforming Your order")
+        }
+        else {
+            juice()
+        }
+
+    }
+
+
+
+    // This is the juices function
+    function juice() {
+
+
+        let item1 = "Kiwi Fruit Juice"
+        let item2 = "Orange Fruit Juice"
+        let item3 = "Dragon Fruit Juice"
+        let item1_price = 80
+        let item2_price = 50
+        let item3_price = 100
+
+
+        let Juice_ch = Number(prompt(`AVAILABLE Juices IN OUR HUB \n1.${item1}   ${item1_price}/-\n 2.${item2}   ${item2_price}/-\n 3.${item3}   ${item3_price}/-\n 4.Go Home`))
+
+        if (Juice_ch === 1) {
+            let qt = Number(prompt(`You chose ${item1} \n Please select the Quantity `))
+            if (check_quantity_juice(qt)) {
+                juice_order()
+                add_items(item1, item1_price, qt)
+                wish_to_purchase()
+            }
+
+        }
+        else if (Juice_ch === 2) {
+            let qt = Number(prompt(`You chose ${item2} \n Please select the Quantity `))
+            if (check_quantity_juice(qt)) {
+                juice_order()
+                add_items(item2, item2_price, qt)
+                wish_to_purchase()
+            }
+
+        }
+        else if (Juice_ch == 3) {
+            let qt = Number(prompt(`You chose ${item3} \n Please select the Quantity `))
+            if (check_quantity_juice(qt)) {
+                juice_order()
+                add_items(item3, item3_price, qt)
+                wish_to_purchase()
+            }
+
+
+        }
+        else if (Juice_ch === 4) {
+            home()
+        }
+        else {
+            alert("please choose the valid option")
+            juice()
+        }
+
+    }
+
+    
+    // Home function
+
+    function home() {
+        let options = Number(prompt("*** Welcome to our Pheonix Hub ***\n What would you choose in our Restaurant \n 1.Veg Pizza \n 2.Non veg Pizza \n 3.Desserts \n 4.Juice \n 5.Exit"))
+        if (options === 1) {
+            veg_pizza()
+        }
+        else if (options === 2) {
+            nonveg_pizza()
+        }
+        else if (options === 3) {
+            desserts()
+        }
+        else if (options === 4) {
+            juice()
+        }
+        else if (options === 5) {
+         bill_receipt()
+    }
+        else {
+            alert("Please choose the valid options")
+            home()
+        }
+    }
+    
+    home()
+    alert("...Thank you for visiting our site\n Stay Home Stay Safe :) \nyou are always welcome")
+
+</script>
+
+</html>
